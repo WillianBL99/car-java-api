@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class DataHandler {
   private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-  public static LocalDate format(String date) {
+  public static LocalDate parse(String date) {
     return LocalDate.parse(date, dateFormat);
   }
 
@@ -16,7 +16,7 @@ public class DataHandler {
 
   public static boolean isDateValid(String date) {
     try {
-      format(date);
+      parse(date);
       return true;
     } catch (Exception e) {
       return false;
