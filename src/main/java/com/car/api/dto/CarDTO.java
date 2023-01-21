@@ -1,17 +1,18 @@
 package com.car.api.dto;
 
+import java.util.Date;
+
 import com.car.api.handlers.*;
 
-public record CarDTO(String model, String brand, String dateOfManufacture, String color, String price,
-    String modelYear) {
-}
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
-// body response
-// {
-// "modle": "Gol",
-// "brand": "Volkswagen",
-// "dateOfManufacture": "01/01/2021",
-// "color": "Black",
-// "price": "100000",
-// "modelYear": "2021"
-// }
+public record CarDTO(
+    @NotBlank String model,
+    @NotBlank String brand,
+    @Past Date dateOfManufacture,
+    @NotBlank String color,
+    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$") String price,
+    @Pattern(regexp = "^[0-9]{2}/[0-9]{2}$") String modelYear) {
+}

@@ -2,12 +2,18 @@ package com.car.api.handlers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
-public class DataHandler {
+import ch.qos.logback.classic.pattern.DateConverter;
+
+public class DateHandler {
   private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-  public static LocalDate parse(String date) {
-    return LocalDate.parse(date, dateFormat);
+  public static Date parse(String date) {
+    return Date.from(LocalDate.parse(date, dateFormat)
+        .atStartOfDay().atZone(
+            java.time.ZoneId.systemDefault())
+        .toInstant());
   }
 
   public static String format(LocalDate date) {
